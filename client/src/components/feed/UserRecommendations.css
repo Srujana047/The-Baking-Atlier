@@ -1,0 +1,146 @@
+/* Recommendations Sidebar */
+.recommendations-sidebar {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Recommendations List */
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Recommendation Card */
+.recommendation-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recommendation-card:hover {
+  background: var(--bg-hover);
+}
+
+.recommendation-card:last-child {
+  border-bottom: none;
+}
+
+/* Avatar */
+.rec-avatar {
+  font-size: 1.8rem;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+/* Recommendation Info */
+.rec-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.rec-name {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rec-specialty {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Follow Button */
+.btn-small {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+
+.sidebar-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Scrollbar Styling */
+.recommendations-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recommendations-list::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.recommendations-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.recommendations-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Responsive - Hide on Mobile */
+@media (max-width: 1200px) {
+  .recommendations-sidebar {
+    display: none;
+  }
+
+  /* TODO: show recommendations in modal/drawer on smaller screens */
+}
+
+@media (max-width: 768px) {
+  /* TODO: implement mobile recommendations layout */
+  .recommendations-sidebar {
+    display: none;
+  }
+}
+
+/* TODO: add recommendation refresh button */
+/* TODO: implement loading skeleton */
+/* TODO: add "remove recommendation" option */
+/* TODO: implement actual recommendation algorithm */
+/* TODO: add follow tracking and UI update */

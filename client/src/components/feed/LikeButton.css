@@ -1,0 +1,82 @@
+/* Like Button */
+.like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.like-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.like-btn.liked {
+  color: #ff4458;
+}
+
+.like-btn.liked:hover {
+  background: rgba(255, 68, 88, 0.1);
+}
+
+.like-btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.like-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.like-icon {
+  font-size: 1.1rem;
+}
+
+.like-count {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.like-btn.liked .like-icon {
+  animation: likeAnimation 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .like-btn {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+    gap: 0.3rem;
+  }
+
+  .like-icon {
+    font-size: 1rem;
+  }
+
+  /* TODO: improve mobile touch targets */
+  /* TODO: add haptic feedback for mobile */
+}
+
+/* TODO: add tooltip on hover showing who liked */
+/* TODO: implement like counter animation */

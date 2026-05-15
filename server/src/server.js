@@ -8,6 +8,9 @@ import { notFoundHandler } from "./middleware/notFoundHandler.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 import authRoutes from "./routes/authRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
+import reportRoutes from "./routes/reportRoutes.js";
 
 dotenv.config();
 
@@ -26,16 +29,21 @@ app.use(morgan("dev"));
 
 // --- Healthcheck ---
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, name: "the-baking-atlier-api", phase: 1 });
+  res.json({ ok: true, name: "the-baking-atlier-api", phase: 2 });
 });
 
 // --- Routes ---
 app.use("/api/auth", authRoutes);
 
-// TODO: future routes placeholders (Phase 2+)
-// app.use("/api/posts", postsRoutes);
-// app.use("/api/comments", commentsRoutes);
+// Phase 2: Social Feed Routes
+app.use("/api/posts", postRoutes);
+app.use("/api/posts/:postId/comments", commentRoutes);
+app.use("/api/reports", reportRoutes);
+
+// TODO: Phase 3+ routes
 // app.use("/api/recipes", recipesRoutes);
+// app.use("/api/users/recommendations", userRecommendationRoutes);
+// app.use("/api/search", searchRoutes);
 // app.use("/api/admin", adminRoutes);
 
 // --- Error handling ---

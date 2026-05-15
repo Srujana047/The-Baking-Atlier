@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { createHttpClient } from "../api/http";
+import { createPostApi } from "../api/postApi";
 import { useAuth } from "../context/AuthContext.jsx";
+import CreatePostForm from "../components/feed/CreatePostForm";
+import Feed from "../components/feed/Feed";
+import UserRecommendations from "../components/feed/UserRecommendations";
 
 function Panel({ title, children }) {
   return (
@@ -10,7 +16,24 @@ function Panel({ title, children }) {
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
+  const [showCreatePostForm, setShowCreatePostForm] = useState(false);
+  const [feedRefreshTrigger, setFeedRefreshTrigger] = useState(0);
+
+  const http = createHttpClient({ getToken: () => token });
+  const postApi = createPostApi(http);
+
+  const handleCreatePost = async (postData) => {
+    try {
+      await postApi.create(postData.caption);
+      setShowCreatePostForm(false);
+      // Trigger feed refresh
+      setFeedRefreshTrigger((prev) => prev + 1);
+    } catch (error) {
+      console.error("Failed to create post:", error);
+      throw error;
+    }
+  };
 
   return (
     <div className="page">
@@ -18,7 +41,7 @@ export default function DashboardPage() {
         <div className="dash-head">
           <h1>Dashboard</h1>
           <p className="muted">
-            Welcome, {user?.name || "Baker"}! This is the Phase 1 layout foundation.
+            Welcome, {user?.name || "Baker"}! Share your baking journey with the community.
           </p>
         </div>
 
@@ -27,63 +50,76 @@ export default function DashboardPage() {
           <aside className="dash-col">
             <Panel title="Your kitchen">
               <ul className="list">
-                <li>Profile (TODO)</li>
-                <li>Saved recipes (TODO)</li>
-                <li>Following (TODO)</li>
+                <li>Profile (TODO - Phase 3)</li>
+                <li>Saved recipes (TODO - Phase 3)</li>
+                <li>Following (TODO - Phase 3)</li>
               </ul>
-              {/* TODO: add profile page and editable settings */}
             </Panel>
 
             <Panel title="Quick actions">
-              <button className="btn btn-outline" type="button" disabled>
-                Create post (TODO)
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={() => setShowCreatePostForm(true)}
+              >
+                ✏️ Create Post
               </button>
               <button className="btn btn-outline" type="button" disabled>
-                Share recipe (TODO)
+                📖 Share Recipe (TODO - Phase 3)
               </button>
-              {/* TODO: enable buttons after posts/recipes systems exist */}
+            </Panel>
+
+            <Panel title="Your role">
+              <p className="muted">
+                You're logged in as <strong>{user?.role || "user"}</strong>.
+              </p>
+              {/* TODO: add admin-only views in Phase 3+ */}
             </Panel>
           </aside>
 
           {/* Center feed area */}
           <section className="dash-col dash-center">
-            <Panel title="Community feed (placeholder)">
-              <div className="placeholder">
-                <p className="muted">
-                  TODO: build posts feed (create/read), comments, likes, and filters.
-                </p>
-                <div className="placeholder-line" />
-                <div className="placeholder-line" />
-                <div className="placeholder-line short" />
-              </div>
+            {/* Create Post Form Modal */}
+            {showCreatePostForm && (
+              <Panel title="Create a Post">
+                <CreatePostForm
+                  userName={user?.name || "Baker"}
+                  onPostCreated={handleCreatePost}
+                  onCancel={() => setShowCreatePostForm(false)}
+                />
+              </Panel>
+            )}
+
+            {/* Community Feed */}
+            <Panel title="Community Feed">
+              <Feed refreshTrigger={feedRefreshTrigger} />
             </Panel>
 
-            <Panel title="Trending (placeholder)">
+            {/* TODO: Trending section for Phase 3 */}
+            {/* <Panel title="Trending">
               <p className="muted">
-                TODO: show trending tags, top bakers, and featured recipes.
+                Trending tags, top bakers, and featured recipes coming soon!
               </p>
-            </Panel>
+            </Panel> */}
           </section>
 
           {/* Right recommendation sidebar */}
           <aside className="dash-col">
-            <Panel title="Recommendations (placeholder)">
-              <ul className="list">
-                <li>Try: Brioche basics (TODO)</li>
-                <li>Follow: PastryPro (TODO)</li>
-                <li>Join: Weekend Bake-along (TODO)</li>
-              </ul>
-              {/* TODO: wire to real data */}
-            </Panel>
+            <UserRecommendations
+              onUserSelect={(userId) => {
+                // TODO: navigate to user profile (Phase 3)
+                console.log("View profile:", userId);
+              }}
+            />
 
-            <Panel title="Role">
-              <p className="muted">
-                Your role is <strong>{user?.role || "user"}</strong>.
-              </p>
-              <p className="muted small">
-                TODO: add admin-only views and moderation tools in later phases.
-              </p>
-            </Panel>
+            {/* TODO: Add search foundation in Phase 2+ */}
+            {/* <Panel title="Search">
+              <input
+                type="text"
+                placeholder="Search posts, users..."
+                className="input"
+              />
+            </Panel> */}
           </aside>
         </div>
       </div>

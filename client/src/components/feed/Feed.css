@@ -1,0 +1,54 @@
+/* Feed Container */
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 400px;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Loading and Empty States */
+.loading-state,
+.error-state,
+.empty-feed {
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+.empty-message {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Load More */
+.load-more-section {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .feed-container {
+    gap: 0.75rem;
+  }
+
+  .posts-list {
+    gap: 0.75rem;
+  }
+
+  /* TODO: improve mobile feed spacing and margins */
+  /* TODO: optimize touch interactions for mobile */
+}
+
+/* TODO: implement infinite scroll loading indicator */
+/* TODO: implement skeleton loading for better UX */
+/* TODO: add feed animations for new posts */

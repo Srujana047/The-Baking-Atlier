@@ -7,6 +7,17 @@
   --accent: #b45309; /* warm caramel */
   --accent2: #a16207;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* Phase 2: Feed System CSS Variables */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fffaf3;
+  --bg-tertiary: #f5f3f0;
+  --bg-hover: rgba(180, 83, 9, 0.05);
+  --text-primary: #1f1a16;
+  --text-muted: #6d625a;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --primary-color: #b45309;
+  --primary-rgb: 180, 83, 9;
 }
 
 :root[data-theme="dark"] {
@@ -18,6 +29,17 @@
   --accent: #f59e0b;
   --accent2: #fbbf24;
   --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  /* Phase 2: Dark mode feed variables */
+  --bg-primary: #171411;
+  --bg-secondary: #0e0c0a;
+  --bg-tertiary: #1a1815;
+  --bg-hover: rgba(245, 158, 11, 0.08);
+  --text-primary: #f7f0ea;
+  --text-muted: #b7a99c;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --primary-color: #f59e0b;
+  --primary-rgb: 245, 158, 11;
 }
 
 * {
@@ -172,6 +194,11 @@ a {
   cursor: not-allowed;
 }
 .btn-solid {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #1b1208;
+  border-color: color-mix(in srgb, var(--accent), black 25%);
+}
+.btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: #1b1208;
   border-color: color-mix(in srgb, var(--accent), black 25%);
