@@ -50,12 +50,18 @@ export function createCommentApi(http) {
         params: { skip, limit }
       });
       return data;
-    }
+    },
 
-    // TODO: implement comment liking (Phase 3+)
-    // like: async (commentId) => { ... },
-    // unlike: async (commentId) => { ... },
-  };
+    // TODO: implement comment liking (Phase 4+)
+    // like: async (commentId) => {
+    //   const { data } = await http.post(`/comments/${commentId}/like`);
+    //   return data;
+    // },
+    // unlike: async (commentId) => {
+    //   const { data } = await http.delete(`/comments/${commentId}/like`);
+    //   return data;
+    // }
+  }
 }
 
 export default createCommentApi;

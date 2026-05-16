@@ -27,6 +27,9 @@ export default function Navbar() {
           <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
             Home
           </NavLink>
+          <NavLink to="/recipes" className={({ isActive }) => (isActive ? "active" : "")}>
+            Recipes
+          </NavLink>
           <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>
             Contact
           </NavLink>
@@ -39,7 +42,7 @@ export default function Navbar() {
             </NavLink>
           ) : null}
 
-          {/* TODO: add "Recipes" and "Community" links when those systems exist */}
+          {/* TODO: Phase 4 - add "Community" link */}
         </nav>
 
         <div className="nav-actions">

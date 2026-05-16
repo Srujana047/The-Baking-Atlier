@@ -11,6 +11,7 @@ import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
+import recipeRoutes from "./routes/recipeRoutes.js";
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.use(morgan("dev"));
 
 // --- Healthcheck ---
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, name: "the-baking-atlier-api", phase: 2 });
+  res.json({ ok: true, name: "the-baking-atlier-api", phase: 3 });
 });
 
 // --- Routes ---
@@ -40,11 +41,14 @@ app.use("/api/posts", postRoutes);
 app.use("/api/posts/:postId/comments", commentRoutes);
 app.use("/api/reports", reportRoutes);
 
-// TODO: Phase 3+ routes
-// app.use("/api/recipes", recipesRoutes);
+// Phase 3: Recipe System Routes
+app.use("/api/recipes", recipeRoutes);
+
+// TODO: Phase 4+ routes
 // app.use("/api/users/recommendations", userRecommendationRoutes);
 // app.use("/api/search", searchRoutes);
 // app.use("/api/admin", adminRoutes);
+// app.use("/api/notifications", notificationRoutes);
 
 // --- Error handling ---
 app.use(notFoundHandler);

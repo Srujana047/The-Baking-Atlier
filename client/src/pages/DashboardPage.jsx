@@ -3,6 +3,7 @@ import { createHttpClient } from "../api/http";
 import { createPostApi } from "../api/postApi";
 import { useAuth } from "../context/AuthContext.jsx";
 import CreatePostForm from "../components/feed/CreatePostForm";
+import CreatePostModal from "../components/feed/CreatePostModal.jsx";
 import Feed from "../components/feed/Feed";
 import UserRecommendations from "../components/feed/UserRecommendations";
 
@@ -18,6 +19,7 @@ function Panel({ title, children }) {
 export default function DashboardPage() {
   const { user, token } = useAuth();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [feedRefreshTrigger, setFeedRefreshTrigger] = useState(0);
 
   const http = createHttpClient({ getToken: () => token });
@@ -60,13 +62,15 @@ export default function DashboardPage() {
               <button
                 className="btn btn-primary"
                 type="button"
-                onClick={() => setShowCreatePostForm(true)}
+                onClick={() => setShowCreateModal(true)}
               >
-                ✏️ Create Post
+                + Create
               </button>
-              <button className="btn btn-outline" type="button" disabled>
-                📖 Share Recipe (TODO - Phase 3)
-              </button>
+
+              {/* TODO: Phase 3+ - add quick recipe draft feature */}
+              {/* <button className="btn btn-outline" type="button">
+                📖 Recipe Drafts
+              </button> */}
             </Panel>
 
             <Panel title="Your role">
@@ -79,7 +83,13 @@ export default function DashboardPage() {
 
           {/* Center feed area */}
           <section className="dash-col dash-center">
-            {/* Create Post Form Modal */}
+            {/* Create Post/Recipe Modal */}
+            <CreatePostModal
+              isOpen={showCreateModal}
+              onClose={() => setShowCreateModal(false)}
+            />
+
+            {/* Create Post Form */}
             {showCreatePostForm && (
               <Panel title="Create a Post">
                 <CreatePostForm

@@ -72,10 +72,10 @@ export default function CreatePostForm({
   };
 
   // TODO: implement image upload handler
-  // const handleImageUpload = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   // validate and preview images
-  // };
+   const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+     // validate and preview images  
+  }
 
   return (
     <div className="create-post-form">
@@ -105,11 +105,11 @@ export default function CreatePostForm({
         </div>
 
         {/* TODO: image upload button */}
-        {/* <div className="form-toolbar">
+        { <div className="form-toolbar">
           <button type="button" className="toolbar-btn" title="Add image">
             📷
           </button>
-        </div> */}
+        </div> }
 
         {/* Error message */}
         {error && <p className="error-message">{error}</p>}

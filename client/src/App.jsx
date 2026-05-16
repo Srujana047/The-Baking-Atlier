@@ -10,6 +10,11 @@ import Contact from "./pages/Contact.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import RecipesPage from "./pages/RecipesPage.jsx";
+import CreateRecipePage from "./pages/CreateRecipePage.jsx";
+import RecipeDetailPage from "./pages/RecipeDetailPage.jsx";
+import EditRecipePage from "./pages/EditRecipePage.jsx";
+/*import CommunityPage from "./pages/CommunityPage.jsx";*/
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 export default function App() {
@@ -24,6 +29,31 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+
+              {/* Phase 3: Recipe Routes */}
+              <Route path="/recipes" element={<RecipesPage />} />
+              <Route
+                path="/recipes/create"
+                element={
+                  <ProtectedRoute>
+                    <CreateRecipePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/recipes/:recipeId" element={<RecipeDetailPage />} />
+
+              {/* Lightweight recipe edit route (Phase 3) */}
+              <Route
+                path="/recipes/:recipeId/edit"
+                element={
+                  <ProtectedRoute>
+                    <EditRecipePage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Community placeholder page */}
+              <Route path="/community" element={<CommunityPage />} />
 
               <Route
                 path="/dashboard"

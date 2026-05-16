@@ -1,0 +1,201 @@
+/**
+ * RecipeFilters Styles
+ * Sidebar/collapsible filter panel for recipe discovery
+ */
+
+.recipe-filters {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filters-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-text-primary);
+}
+
+.toggle-filters-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  display: none;
+}
+
+.filters-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Filter Group */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-group h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-option {
+  padding: 0.5rem 1rem;
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filter-option:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-option.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+/* Active Filters Display */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.filter-tag button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.filter-tag button:hover {
+  opacity: 0.7;
+}
+
+/* Time Range Slider */
+.time-range {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.time-range input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+.time-range span {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toggle-filters-btn {
+    display: block;
+  }
+
+  .recipe-filters {
+    padding: 1rem;
+  }
+
+  .filters-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .recipe-filters.show-filters .filters-content,
+  .recipe-filters:not(.collapsed) .filters-content {
+    max-height: 1000px;
+    padding-top: 1rem;
+  }
+
+  .filter-options {
+    gap: 0.35rem;
+  }
+
+  .filter-option {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipe-filters {
+    margin-bottom: 1rem;
+  }
+
+  .filter-group h4 {
+    font-size: 0.85rem;
+  }
+
+  .filter-options {
+    gap: 0.25rem;
+  }
+
+  .filter-option {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .active-filters {
+    gap: 0.35rem;
+  }
+
+  .filter-tag {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
