@@ -1,0 +1,152 @@
+:root {
+  --admin-surface: rgba(255, 250, 242, 0.95);
+  --admin-highlight: rgba(245, 158, 11, 0.12);
+}
+
+.admin-shell {
+  padding-bottom: 32px;
+}
+
+.admin-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-notification-pill,
+.admin-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 320px;
+  gap: 24px;
+}
+
+.admin-sidebar {
+  display: grid;
+  gap: 20px;
+  position: sticky;
+  top: 120px;
+}
+
+.admin-sidebar .sidebar-section {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-sidebar ul {
+  padding-left: 16px;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.admin-sidebar a {
+  color: var(--text);
+}
+
+.admin-main {
+  display: grid;
+  gap: 24px;
+}
+
+.admin-right-column {
+  display: grid;
+  gap: 24px;
+  position: sticky;
+  top: 120px;
+  align-self: start;
+}
+
+.admin-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.admin-stat-card {
+  border: 1px solid var(--border);
+  background: var(--admin-surface);
+}
+
+.admin-section {
+  margin-top: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 100%;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.admin-warning-row {
+  background: var(--admin-highlight);
+}
+
+.admin-actions-cell {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-filter-form {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.admin-warn-card {
+  background: var(--bg-secondary);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+@media (max-width: 1080px) {
+  .admin-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-topbar {
+    grid-template-columns: 1fr;
+  }
+  .admin-right-column,
+  .admin-sidebar {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .admin-card-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-actions-cell {
+    flex-direction: column;
+  }
+}

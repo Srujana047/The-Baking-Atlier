@@ -87,16 +87,28 @@ export default function DashboardPage() {
             <CreatePostModal
               isOpen={showCreateModal}
               onClose={() => setShowCreateModal(false)}
+              onCreateCasualPost={() => {
+                setShowCreateModal(false);
+                setShowCreatePostForm(true);
+                window.setTimeout(() => {
+                  document.getElementById("create-post-form")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                  });
+                }, 100);
+              }}
             />
 
             {/* Create Post Form */}
             {showCreatePostForm && (
               <Panel title="Create a Post">
-                <CreatePostForm
-                  userName={user?.name || "Baker"}
-                  onPostCreated={handleCreatePost}
-                  onCancel={() => setShowCreatePostForm(false)}
-                />
+                <div id="create-post-form">
+                  <CreatePostForm
+                    userName={user?.name || "Baker"}
+                    onPostCreated={handleCreatePost}
+                    onCancel={() => setShowCreatePostForm(false)}
+                  />
+                </div>
               </Panel>
             )}
 

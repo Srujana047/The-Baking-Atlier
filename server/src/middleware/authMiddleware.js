@@ -31,6 +31,8 @@ export async function requireAuth(req, res, next) {
       role: user.role
     };
 
+    // TODO: add request sanitization and stricter token refresh handling in production.
+
     next();
   } catch {
     return res.status(401).json({ message: "Invalid or expired token" });
@@ -48,4 +50,6 @@ export function requireRole(...allowedRoles) {
     next();
   };
 }
+
+export const requireAdmin = requireRole("admin");
 

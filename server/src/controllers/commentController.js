@@ -123,8 +123,7 @@ export const deleteComment = asyncHandler(async (req, res) => {
   }
 
   // Only comment author or admin can delete
-  // TODO: add admin role check
-  if (comment.authorId.toString() !== userId) {
+  if (comment.authorId.toString() !== userId && req.user.role !== "admin") {
     return res
       .status(403)
       .json({ message: "Unauthorized to delete this comment" });

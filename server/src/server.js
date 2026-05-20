@@ -12,10 +12,12 @@ import postRoutes from "./routes/postRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import recipeRoutes from "./routes/recipeRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
 
 const app = express();
+app.disable("x-powered-by");
 
 // --- Core middleware ---
 app.use(express.json());
@@ -30,7 +32,7 @@ app.use(morgan("dev"));
 
 // --- Healthcheck ---
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, name: "the-baking-atlier-api", phase: 3 });
+  res.json({ ok: true, name: "the-baking-atlier-api", phase: 4 });
 });
 
 // --- Routes ---
@@ -40,6 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/posts/:postId/comments", commentRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Phase 3: Recipe System Routes
 app.use("/api/recipes", recipeRoutes);

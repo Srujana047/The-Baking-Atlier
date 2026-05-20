@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
+import LoadingSpinner from "../ui/LoadingSpinner.jsx";
 
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, bootstrapping } = useAuth();
@@ -9,7 +10,7 @@ export default function ProtectedRoute({ children }) {
     return (
       <div className="page">
         <div className="container">
-          <p className="muted">Loading your session…</p>
+          <LoadingSpinner message="Loading your session…" />
         </div>
       </div>
     );

@@ -84,8 +84,8 @@ export const reportValidators = {
           errorMessage: "Content type is required"
         },
         isIn: {
-          options: [["post", "comment"]],
-          errorMessage: "Content type must be 'post' or 'comment'"
+          options: [["post", "comment", "recipe"]],
+          errorMessage: "Content type must be 'post', 'comment', or 'recipe'"
         }
       },
       reportedId: {
@@ -103,6 +103,26 @@ export const reportValidators = {
         isIn: {
           options: [["inappropriate", "spam", "harassment", "offensive", "other"]],
           errorMessage: "Invalid reason"
+        }
+      }
+    }
+  },
+  updateReportStatus: {
+    params: {
+      reportId: {
+        isMongoId: {
+          errorMessage: "Invalid report ID"
+        }
+      }
+    },
+    body: {
+      status: {
+        notEmpty: {
+          errorMessage: "Report status is required"
+        },
+        isIn: {
+          options: [["pending", "reviewed", "resolved"]],
+          errorMessage: "Status must be pending, reviewed, or resolved"
         }
       }
     }

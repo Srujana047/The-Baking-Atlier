@@ -6,6 +6,7 @@ import { createRecipeApi } from "../api/recipeApi.js";
 import RecipeGrid from "../components/recipes/RecipeGrid.jsx";
 import RecipeSearchBar from "../components/recipes/RecipeSearchBar.jsx";
 import RecipeFilters from "../components/recipes/RecipeFilters.jsx";
+import ErrorBanner from "../components/ui/ErrorBanner.jsx";
 import "./RecipesPage.css";
 
 /**
@@ -71,27 +72,14 @@ export default function RecipesPage() {
   }, [filters]);
 
   // Handle search
-  const handleSearch = (query) => {
+  const handleSearch = async (query) => {
     setSearchQuery(query);
     setCurrentPage(0);
-    // Fetch with search query
-    performSearch(query);
-  };
-
-  // Handle clearing search
-  const handleClearSearch = () => {
-    setSearchQuery("");
-    setCurrentPage(0);
-    fetchRecipes(0);
-  };
-
-  // Perform search
-  const performSearch = async (query) => {
     setLoading(true);
     setError("");
 
     try {
-      const response = await searchRecipes(query, filters);
+      const response = await recipeApi.search(query, filters);
       setRecipes(response.results || []);
       setTotalPages(1);
     } catch (err) {
@@ -102,13 +90,20 @@ export default function RecipesPage() {
     }
   };
 
+  // Handle clearing search
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setCurrentPage(0);
+    fetchRecipes(0);
+  };
+
   // Handle filter changes
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
     setCurrentPage(0);
-    // Reset search when filters change
     if (searchQuery) {
       setSearchQuery("");
+      fetchRecipes(0);
     }
   };
 
@@ -149,14 +144,7 @@ export default function RecipesPage() {
         />
 
         {/* Error Message */}
-        {error && (
-          <div className="error-banner">
-            <span>{error}</span>
-            <button onClick={() => setError("")} aria-label="Close error">
-              ✕
-            </button>
-          </div>
-        )}
+        <ErrorBanner message={error} onClose={() => setError("")} />
 
         {/* Main Content */}
         <div className="recipes-main">

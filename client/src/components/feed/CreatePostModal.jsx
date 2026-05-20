@@ -9,15 +9,13 @@ import "./CreatePostModal.css";
  * - isOpen: boolean - whether modal is visible
  * - onClose: function - callback to close modal
  */
-export default function CreatePostModal({ isOpen, onClose }) {
+export default function CreatePostModal({ isOpen, onClose, onCreateCasualPost }) {
   const navigate = useNavigate();
 
   if (!isOpen) return null;
 
   const handleCasualPost = () => {
-    onClose();
-    // Scroll to create post form on dashboard
-    document.getElementById("create-post-form")?.scrollIntoView({ behavior: "smooth" });
+    onCreateCasualPost?.();
   };
 
   const handleRecipe = () => {

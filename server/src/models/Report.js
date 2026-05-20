@@ -19,7 +19,7 @@ const reportSchema = new mongoose.Schema(
     // What is being reported
     reportedType: {
       type: String,
-      enum: ["post", "comment"],
+      enum: ["post", "comment", "recipe"],
       required: true,
       description: "Type of content being reported"
     },
@@ -27,7 +27,7 @@ const reportSchema = new mongoose.Schema(
     reportedId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      description: "ID of post or comment being reported"
+      description: "ID of reported content"
     },
 
     // Context: if reporting a comment, include the post ID
@@ -59,10 +59,24 @@ const reportSchema = new mongoose.Schema(
     },
 
     // TODO: add admin notes field
-    // adminNotes: String,
+    adminNotes: {
+      type: String,
+      trim: true,
+      default: ""
+    },
 
     // TODO: add action taken field (removed, warned, etc.)
-    // actionTaken: String,
+    actionTaken: {
+      type: String,
+      trim: true,
+      default: ""
+    },
+
+    // Reviewer reference for moderation history
+    reviewedById: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
 
     // Duplicate report tracking
     isDuplicate: {

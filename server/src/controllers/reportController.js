@@ -1,6 +1,8 @@
 import { Report } from "../models/Report.js";
 import { Post } from "../models/Post.js";
 import { Comment } from "../models/Comment.js";
+import { Recipe } from "../models/Recipe.js";
+import { AdminLog } from "../models/AdminLog.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 
 /**
@@ -26,6 +28,11 @@ export const createReport = asyncHandler(async (req, res) => {
     const comment = await Comment.findById(reportedId);
     if (!comment || comment.isDeleted) {
       return res.status(404).json({ message: "Comment not found" });
+    }
+  } else if (reportedType === "recipe") {
+    const recipe = await Recipe.findById(reportedId);
+    if (!recipe) {
+      return res.status(404).json({ message: "Recipe not found" });
     }
   }
 
@@ -121,25 +128,39 @@ export const getReportById = asyncHandler(async (req, res) => {
  * Update report status (admin only)
  * PATCH /api/reports/:reportId
  */
+async function createReportLog(adminId, report, status) {
+  try {
+    await AdminLog.create({
+      adminId,
+      action: `Updated report status to ${status}`,
+      targetType: "report",
+      targetId: report._id,
+      details: `Report for ${report.reportedType} ${report.reportedId} changed to ${status}`
+    });
+  } catch (error) {
+    console.warn("Admin report log failed:", error.message);
+  }
+}
+
 export const updateReportStatus = asyncHandler(async (req, res) => {
   const { reportId } = req.params;
   const { status } = req.body;
 
-  // TODO: add admin authorization check
-  // TODO: add validation for status values
-
-  const report = await Report.findByIdAndUpdate(
-    reportId,
-    { status },
-    { new: true }
-  );
-
+  const report = await Report.findById(reportId);
   if (!report) {
     return res.status(404).json({ message: "Report not found" });
   }
 
+  report.status = status;
+  report.reviewedById = req.user.id;
+  await report.save();
+
+  if (req.user.role === "admin") {
+    await createReportLog(req.user.id, report, status);
+  }
+
   // TODO: if status is 'resolved', take appropriate action
-  // (e.g., hide post, warn user, etc.)
+  // (e.g., hide post, mark content for review, warn author)
 
   return res.json({
     message: "Report status updated",

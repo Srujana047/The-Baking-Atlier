@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
+import AdminRoute from "./components/routing/AdminRoute.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 
@@ -14,7 +15,8 @@ import RecipesPage from "./pages/RecipesPage.jsx";
 import CreateRecipePage from "./pages/CreateRecipePage.jsx";
 import RecipeDetailPage from "./pages/RecipeDetailPage.jsx";
 import EditRecipePage from "./pages/EditRecipePage.jsx";
-/*import CommunityPage from "./pages/CommunityPage.jsx";*/
+import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
+import UnauthorizedPage from "./pages/UnauthorizedPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 export default function App() {
@@ -52,8 +54,8 @@ export default function App() {
                 }
               />
 
-              {/* Community placeholder page */}
-              <Route path="/community" element={<CommunityPage />} />
+              {/* TODO: add community pages once the Phase 4 community flow is stable */}
+              {/* <Route path="/community" element={<CommunityPage />} /> */}
 
               <Route
                 path="/dashboard"
@@ -63,6 +65,15 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/admin"
+                element={
+                  <AdminRoute>
+                    <AdminDashboardPage />
+                  </AdminRoute>
+                }
+              />
+              <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
               {/* TODO: add admin-only routes foundation once admin pages exist */}
               { /*<Route path="/admin" element={<AdminRoute><AdminPage/></AdminRoute>} /> */}

@@ -211,8 +211,8 @@ export const deleteRecipe = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "Recipe not found" });
   }
 
-  // Check if user is the recipe author
-  if (recipe.authorId.toString() !== userId.toString()) {
+  // Check if user is the recipe author or admin
+  if (recipe.authorId.toString() !== userId.toString() && req.user.role !== "admin") {
     return res.status(403).json({
       message: "You are not authorized to delete this recipe"
     });

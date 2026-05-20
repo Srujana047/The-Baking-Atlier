@@ -189,8 +189,7 @@ export const deletePost = asyncHandler(async (req, res) => {
   }
 
   // Only post author or admin can delete
-  // TODO: add admin role check
-  if (post.authorId.toString() !== userId) {
+  if (post.authorId.toString() !== userId && req.user.role !== "admin") {
     return res.status(403).json({ message: "Unauthorized to delete this post" });
   }
 
