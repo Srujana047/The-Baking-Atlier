@@ -1,99 +1,74 @@
-# The Baking Atlier — Phase 1
+# Bakery Community Platform 🧁
 
-Full-stack bakery community web app (Phase 1 foundation):
+A MERN-stack community platform built for baking enthusiasts to share their baking experiences, discover recipes, and interact with fellow bakers.
 
-- Frontend: React + JavaScript + React Router + Axios
-- Backend: Express.js + JWT + bcrypt
-- Database: MongoDB + Mongoose
+## Features
 
-## What Phase 1 includes
+* User Authentication (Login & Signup)
+* Bakery Community Feed
+* Casual Baking Posts
+* Professional Recipe Sharing
+* Likes & Comments
+* Content Reporting System
+* User Profiles
+* Recipe Search & Filtering
+* Admin Dashboard & Moderation
+* Light/Dark Mode
 
-- Project architecture + setup
-- Authentication (signup/login) with JWT + hashed passwords
-- Persistent login session (token stored client-side)
-- Protected routes + dashboard skeleton
-- Role system foundation (`user`, `admin`)
-- Bakery-themed landing page (scrollable sections)
-- Light/Dark mode foundation with persistence
+## Tech Stack
 
-## What Phase 1 does NOT include (placeholders only)
+### Frontend
 
-- Posts, comments, recipes, moderation, reporting, notifications, advanced search
+* React
+* JavaScript
+* Axios
+* React Router
 
-Those are intentionally left as `TODO:` tasks throughout the codebase.
+### Backend
 
----
+* Node.js
+* Express.js
 
-## Project structure (high level)
+### Database
 
-```
-The Baking Atlier/
-  client/   # React app
-  server/   # Express API
-```
+* MongoDB
+* Mongoose
 
----
+### Authentication
 
-## Prerequisites
+* JWT
+* bcrypt
 
-- Node.js 18+ (recommended)
-- MongoDB (local or Atlas)
+## Project Goal
 
----
+Create a community-driven platform where bakers can:
 
-## Setup (step-by-step)
+* Share baking updates
+* Publish detailed recipes
+* Discover recipes from others
+* Engage through comments and likes
+* Build a collaborative baking community
 
-### 1) Install dependencies (root installs all workspaces)
+## Current Status
 
-```bash
-npm install
-```
+🚧 Under Development
 
-### 2) Backend environment variables
+Project is being built in multiple phases:
 
-Create `server/.env` by copying `server/.env.example`.
+1. Foundation & Authentication
+2. Posts & Feed System
+3. Recipe System
+4. Admin Dashboard
+5. UI Polish & Optimization
 
-### 3) Start both frontend + backend (dev)
+## Future Improvements
 
-```bash
-npm run dev
-```
-
-- React dev server: `http://localhost:5173`
-- API server: `http://localhost:5000`
-
----
-
-## Run separately (optional)
-
-### Backend only
-
-```bash
-npm run dev:server
-```
-
-### Frontend only
-
-```bash
-npm run dev:client
-```
+* Image Uploads
+* Follow System
+* Bookmarked Recipes
+* Real-time Notifications
+* Advanced Search
 
 ---
 
-## Common debugging tips
-
-- If login/signup fails, check `server/.env` (`MONGO_URI`, `JWT_SECRET`) and restart the server.
-- If the frontend can’t reach the backend, verify `client/.env` (`VITE_API_BASE_URL`) and that the backend is running.
-- If MongoDB connection fails, confirm your Atlas IP allowlist or that local MongoDB is running.
-
----
-
-## Next steps after Phase 1
-
-- TODO: build posts + comments system (API + UI + schemas)
-- TODO: recipe creation system + browsing
-- TODO: admin moderation tools (role-gated routes + UI)
-- TODO: notification system + real-time updates
-- TODO: stronger validation UX and accessibility pass
-- TODO: production hardening (rate limiting, helmet config tuning, refresh tokens, CSRF strategy if using cookies)
-
+Built as a MERN Stack learning and portfolio project.
